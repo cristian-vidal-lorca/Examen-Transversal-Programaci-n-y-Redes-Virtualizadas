@@ -1,0 +1,15 @@
+---
+- name: Generar respaldo de configuración
+  hosts: VIDAL-LORCA
+  tasks:
+    - name: Ejecutar comando show running-config
+      ios_command:
+        commands:
+          - show running-config
+      register: output_config
+
+    - name: Guardar respaldo en archivo
+      copy:
+        content: "{{ output_config.stdout[0] }}"
+        dest: "/path/to/backup_running_config.txt"
+

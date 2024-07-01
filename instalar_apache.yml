@@ -1,0 +1,20 @@
+---
+- name: Instalar Apache
+  hosts: VIDAL-LORCA
+  tasks:
+    - name: Instalar Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Configurar Apache para utilizar el puerto 9999
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        line: 'Listen 9999'
+
+    - name: Iniciar servicio Apache
+      service:
+        name: httpd
+        state: started
+

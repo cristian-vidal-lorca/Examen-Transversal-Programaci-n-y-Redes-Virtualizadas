@@ -1,0 +1,20 @@
+# Add to this file for the Ansible lab
+
+---
+- name: Asignar IPv6 a loopback 
+  hosts: VIDAL-LORCA
+  gather_facts: no
+  tasks:
+    - name: Configurar IPv6 en Loopback 1
+      ios_config:
+        lines:
+          - interface Loopback33
+          - ipv6 address 3001:ABCD:ABCD:1::1/128
+          - ipv6 address FE80::1 link-local
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: cisco
+        password: cisco123!
+        authorize: yes
+        auth_pass: admin
+
